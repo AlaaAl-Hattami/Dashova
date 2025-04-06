@@ -24,6 +24,11 @@ router.post("/search", usercontroller.user_search_post)
 router.delete("/edit/:id", usercontroller.user_delete) 
 
 router.put("/edit/:id", usercontroller.user_edit_put)
+
+
+ // هنا بيكون الخاص بحق انشاءحساب جديد 
+ router.post("/register", usercontroller.user_register_post)
+
 // app.post("/", (req, res) => {
 //   console.log(req.body);
 

@@ -1,7 +1,7 @@
 
 const Article = require("../models/dataSchema");
 var moment = require("moment");
-
+const Authuser = require("../models/register");
  
 const user_welcom_get = (req, res) => {
   res.render("welcom");
@@ -47,7 +47,10 @@ const user_register_get = (req, res) => {
 
  const user_search_post = (req, res) => {
    const search = req.body.search.trim();
-   Article.find({ $or: [{ firstname: search }, { lastname: search }] })
+   Article.find({ $or: [
+    { firstname: search }, { lastname: search }
+  ]
+ })
      .then((data) => {
        res.render("user/search", { arr: data, moment: moment });
      })
@@ -89,6 +92,17 @@ const user_register_get = (req, res) => {
         console.log(err);
       });
   };
+
+  // هنا بيكون الداله حق انشاء حساب للمستخدم الجديد
+  const user_register_post = async (req, res) => {
+   try {
+    const user = Authuser.create(req.body);
+    console.log(user);
+
+   } catch (error) {
+    console.log(error);
+   }
+  }; 
   
 module.exports = {
   user_login_get,
@@ -101,5 +115,6 @@ module.exports = {
   user_delete,
   user_edit_put,
   user_add_get, 
-  user_post
+  user_post,
+  user_register_post
 };

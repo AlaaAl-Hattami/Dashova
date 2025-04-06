@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const  articleSchema = new Schema({
+const  authSchema = new Schema({
     firstname:String,
     lastname:String,
     email:String,
@@ -13,5 +13,5 @@ const  articleSchema = new Schema({
 }, {timestamps:true}
 )
 
-const mydata=mongoose.model("user",articleSchema);
-module.exports=mydata;
+const authuser=mongoose.model("custemer",authSchema);
+module.exports=authuser;
