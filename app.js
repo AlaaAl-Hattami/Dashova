@@ -2,9 +2,8 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 15000;
 const mongoose = require("mongoose");
-const birds = require('./routes/birds');
-const birds2 = require('./routes/addroute');
-
+const birds = require("./routes/birds");
+const birds2 = require("./routes/addroute");
 
 // require
 var methodOverride = require("method-override");
@@ -12,6 +11,10 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+
+// cookie-parser هذا علشان نجيب cookies من المتصفح حقنا هذه يعني اعدادات نزلتها
+var cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 //  هذا الكود يعمل على تحديث الصفحه تلقائي بدون مانعمل refresh للصفحه
 const path = require("path");
@@ -28,7 +31,6 @@ liveReloadServer.server.once("connection", () => {
   }, 100);
 });
 
-
 mongoose
   .connect(
     "mongodb+srv://alaa1:774460081@cluster0.msyyhxg.mongodb.net/all-data?retryWrites=true&w=majority&appName=Cluster0"
@@ -43,7 +45,5 @@ mongoose
     console.log(err);
   });
 
-
-  app.use( birds)
-  app.use( birds2)
-
+app.use(birds);
+app.use(birds2);

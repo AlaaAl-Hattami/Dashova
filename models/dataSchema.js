@@ -13,5 +13,5 @@ const  authSchema = new Schema({
 }, {timestamps:true}
 )
 
-const authuser=mongoose.model("custemer",authSchema);
-module.exports=authuser;
+const mydata=mongoose.model("custemer",authSchema);
+module.exports=mydata;

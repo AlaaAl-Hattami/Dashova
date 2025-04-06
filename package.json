@@ -11,17 +11,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.16",
+    "bcrypt": "^5.1.1",
     "connect-livereload": "^0.6.1",
+    "cookie-parser": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "livereload": "^0.9.3",
     "method-override": "^3.0.0",
     "moment": "^2.30.1",
     "mongoose": "^8.13.0",
     "nodemon": "^3.1.9"
-  },
-  "devDependencies": {
-    "tailwindcss": "^3.4.17"
   }
 }

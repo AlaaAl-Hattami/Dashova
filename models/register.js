@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const articleSchema = new Schema({
   
@@ -9,5 +10,14 @@ const articleSchema = new Schema({
     confirm_password: String || Number,
 })
 
- const mydata = mongoose.model('user', articleSchema);
-module.exports = mydata;
+articleSchema.pre("save", async function (next) {
+ const salt = await bcrypt.genSalt();
+ this.password = await bcrypt.hash(this.password, salt);
+//  this.email = await bcrypt.hash(this.email, salt);
+//  this.confirm_password = await bcrypt.hash(this.confirm_password, salt);
+
+ next();
+});
+
+ const authuser = mongoose.model('user', articleSchema);
+module.exports = authuser;
