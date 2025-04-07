@@ -1,0 +1,23 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+
+const articleSchema = new Schema({
+  
+    username: String,
+    email: String,
+    password: String || Number,
+    confirm_password: String || Number,
+})
+// هنا اشفر البيانات  الي اشتيها بس بشفر الان الباسورد فقط 
+articleSchema.pre("save", async function (next) {
+ const salt = await bcrypt.genSalt();
+ this.password = await bcrypt.hash(this.password, salt);
+//  this.email = await bcrypt.hash(this.email, salt);
+//  this.confirm_password = await bcrypt.hash(this.confirm_password, salt);
+
+ next();
+});
+
+ const authuser = mongoose.model('user', articleSchema);
+module.exports = authuser;

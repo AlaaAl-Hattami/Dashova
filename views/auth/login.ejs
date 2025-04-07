@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="./js/color-modes.js"></script>
+    <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.min.css" />
+    <link rel="shortcut icon" href="./img/me.JPG" type="image/x-icon" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Login page for Dashova Dashboard" />
+    <meta name="author" content="Alaa Al-Hattami" />
+    <title>Dashova - Login</title>
+
+    <!-- Bootstrap & Fonts -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/dark-light.css" />
+    <link rel="stylesheet" href="./css/sidebars.css" />
+    <link rel="stylesheet" href="./css/myStyle.css" />
+    <link rel="stylesheet" href="./css/welcom.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  
+  </head>
+
+  <body class="d-flex h-100 text-center text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      
+      <!-- Header -->
+      <%- include('./header.ejs' , {currentPage:"login"}) %>
+
+      <!-- Main Login Content -->
+      <main class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card">
+          <h2>LOGIN</h2>
+
+          <form action="/login" method="POST" class="form-container">
+            <label for="email" class="text-start w-100 mb-1">Email</label>
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="email" name="email" placeholder="Enter your email" />
+            </div>
+
+            <label for="password"  class="text-start w-100 mb-1">Password</label>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" name="password" placeholder="Enter your password" />
+            </div>
+
+            <div class="checkbox-container">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn">Sign In</button>
+
+            <div class="signup">
+              Don’t have an account? <a href="/register">Sign Up</a>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="mt-auto">
+        <p>Developed by 
+          <a href="https://x.com/Al2027IT" class="fw-bold" style="color: #FFA500">Alaa Al-Hattami</a>
+        </p>
+      </footer>
+    </div>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

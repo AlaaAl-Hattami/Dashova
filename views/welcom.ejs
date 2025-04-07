@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="./js/color-modes.js"></script>
+    <link rel="stylesheet" href="./bootstrap-icons-1.10.5/font/bootstrap-icons.min.css" />
+    <link rel="shortcut icon" href="./img/me.JPG" type="image/x-icon" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="generator" content="Hugo 0.112.5" />
+    <title>Dashova - Home</title>
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/dark-light.css" />
+    <!-- Custom styles for this template -->
+    <link href="./css/sidebars.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/myStyle.css" />
+   <link rel="stylesheet" href="./css/welcom.css" />
+
+   
+  </head>
+
+  <body class="d-flex h-100 text-center text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+<!-- هذا خليته خاص بالاعلى الضوء-->
+<!-- <div class="top-light-overlay"></div> -->
+
+        <%- include('./auth/header.ejs', {currentPage : "welcom"}) %>
+
+  
+      <main class="px-3">
+        <h1 class="fade-in " >
+            Welcome to <span class="fw-bold" style="color: #ffa500;">Dashova<sup class="text-red">💥</sup></span>
+          </h1>
+          <p class="lead mt-4 mb-5 fade-in" >
+            A powerful dashboard for managing your applications and data. Get started by logging in or signing up!
+          </p>
+          
+          <p class="lead">
+            <a href="/home" class="btn btn-lg btn-light fade-in border-white bg-white" style="border: 1px solid #FFA500; 
+                box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4); border-radius: 25px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              Dashova
+            </a>
+            <a href="/signup" class="btn btn-lg fade-in fw-bold" style="border: 2px solid #FFA500; color: #FFA500; 
+                box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4); border-radius: 25px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              Sign Up
+            </a>
+          </p>
+          
+          <style>
+            /* تأثير التمرير للأزرار */
+            .btn:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 6px 15px rgba(255, 165, 0, 0.7); 
+            }
+          </style>
+          
+      </main>
+
+      <footer class="mt-auto">
+        <p>
+          Developed by <a href="https://x.com/Al2027IT" class="fw-bold" style="color: #FFA500">Alaa Al-Hattami</a>
+        </p>
+      </footer>
+    </div>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+   
+  </body>
+</html>
