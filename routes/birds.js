@@ -1,11 +1,16 @@
 const express = require('express')
 const router = express.Router()
  const usercontroller = require("../Controllers/usercontroller")
- const requierdAuth =require("../middleware/middleware")
+ var {requierdAuth} =require("../middleware/middleware")
+ var {checkuser} = require ("../middleware/middleware")
 // get الخاصه هذه اكواد المشروع الحقيقي
 
+ router.get("*" ,checkuser)
 
-router.get("/",    usercontroller.user_welcom_get)
+router.get("/" , checkuser, usercontroller.user_welcom_get)
+
+router.get("/singout", usercontroller.user_signout_get)
+
 
 router.get("/login", usercontroller.user_login_get)
 
@@ -31,6 +36,7 @@ router.put("/edit/:id", usercontroller.user_edit_put)
  router.post("/register", usercontroller.user_register_post)
 
  router.post("/login", usercontroller.user_login_post)
+
 // app.post("/", (req, res) => {
 //   console.log(req.body);
 

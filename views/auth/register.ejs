@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="./css/login.css" />
     <link rel="stylesheet" href="./css/register.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-    
   </head>
 
   <body class="d-flex h-100 text-center text-bg-dark">
@@ -34,7 +32,7 @@
         <div class="card">
           <h2>SIGN UP</h2>
 
-          <form action="/register" method="POST" class="form-signup">
+          <form action="/register" method="post" class="form-signup">
             <label for="username" class="text-start w-100 mb-1">Username</label>
             <div class="input-group">
               <i class="fas fa-user"></i>
@@ -44,7 +42,7 @@
             <label for="email" class="text-start w-100 mb-1">Email</label>
             <div class="input-group">
               <i class="fas fa-envelope"></i>
-              <input type="email" id="email" name="email" placeholder="Enter your email" />
+              <input type="text" id="email" name="email" placeholder="Enter your email" />
             </div>
 
             <label for="password" class="text-start w-100 mb-1">Password</label>
@@ -76,6 +74,49 @@
         </p>
       </footer>
     </div>
+
+    <!-- ✅ JavaScript to handle form submission with fetch -->
+    <script>
+      const registerForm = document.querySelector(".form-signup");
+
+      registerForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const username = document.querySelector("#username");
+        const email = document.querySelector("#email");
+        const password = document.querySelector("#password");
+        const confirmPassword = document.querySelector("#confirm-password");
+
+        const res = await fetch("/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username.value,
+            email: email.value,
+            password: password.value,
+            confirm_password: confirmPassword.value,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (data.arr_errors) {
+          console.log("Validation errors:", data.arr_errors);
+          // يمكنك إظهارها في صفحة HTML بدلاً من الكونسول
+        }
+
+        if (data.EmailFound) {
+          console.log("Email already exists:", data.EmailFound);
+        }
+
+        if (data.id) {
+          console.log("Registration successful!");
+          location.assign("/home");
+        }
+      });
+    </script>
 
     <script src="./js/bootstrap.bundle.min.js"></script>
   </body>

@@ -1,49 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="mb-auto">
-        <div class="container-fluid">
-          <div class="d-flex align-items-center justify-content-between">
-            <!--  هذا عملته شعار الموقع مع تأثير الظل -->
-            <div class="d-flex align-items-center">
-              <h3 class="mb-0 me-3" style="color: dodgerblue; font-size: 2rem; font-weight: bold; text-transform: uppercase;">
-                
-              </h3>
-              <a href="/">
-                <img
-                  src="../img/Dashova.png"
-                  alt="Logo"
-                  width="50"
-                  height="50"
-                  class="rounded-circle tear-logo"
-                  style="box-shadow: 0 4px 8px rgba(255, 165, 0, 1);"
-                />
-              </a>
-              
-            </div>
-      
-            <!-- تعليق عشان نتنقل عبر الروابط  التسجيل -->
-            <nav class="nav nav-masthead d-flex justify-evenly align-items-center">
-              <a class="nav-link fw-bold py-2 px-3 fade-in " 
-                href="/login" 
-                style="color: #ffa500; transition: color 0.3s ease; <%= currentPage === 'login' ? 'border: 1px solid #ffa500;' : '' %>">
-                Sign In
-             </a>
-             
-             
-             <a class="nav-link fw-bold py-2 px-3 fade-in " 
-                href="/register" 
-                style="color: #ffa500; transition: color 0.3s ease; <%= currentPage === 'register' ? 'border: 1px solid #ffa500;' : '' %>">
-                Sign Up
-             </a>
-            </nav>
+      <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between">
+          <!--  هذا عملته شعار الموقع مع تأثير الظل -->
+          <div class="d-flex align-items-center">
+            <h3
+              class="mb-0 me-3"
+              style="
+                color: dodgerblue;
+                font-size: 2rem;
+                font-weight: bold;
+                text-transform: uppercase;
+              "
+            ></h3>
+            <a href="/">
+              <img
+                src="../img/Dashova.png"
+                alt="Logo"
+                width="50"
+                height="50"
+                class="rounded-circle tear-logo"
+                style="box-shadow: 0 4px 8px rgba(255, 165, 0, 1)"
+              />
+            </a>
           </div>
+
+          <% if (user) { %>
+         <div class="d-flex align-items-center">
+          <span class="m-0 me-2">أهلا👏: <%= user.username %></span>
+          <a
+          class="nav-link fw-bold py-2 px-3 fade-in "
+          href="/singout"
+          style="color: red; transition: color 0.3s ease;"
+        >
+          log-Out
+        </a>
+         </div>
+          <% } else { %>
+          <!-- تعليق عشان نتنقل عبر الروابط  التسجيل -->
+          <nav
+            class="nav nav-masthead d-flex justify-evenly align-items-center"
+          >
+            <a
+              class="nav-link fw-bold py-2 px-3 fade-in"
+              href="/login"
+              style="color: #ffa500; transition: color 0.3s ease; <%= currentPage === 'login' ? 'border: 1px solid #ffa500;' : '' %>"
+            >
+              Sign In
+            </a>
+
+            <a
+              class="nav-link fw-bold py-2 px-3 fade-in"
+              href="/register"
+              style="color: #ffa500; transition: color 0.3s ease; <%= currentPage === 'register' ? 'border: 1px solid #ffa500;' : '' %>"
+            >
+              Sign Up
+            </a>
+          </nav>
+          <% } %>
         </div>
-      </header>
-</body>
+      </div>
+    </header>
+  </body>
 </html>

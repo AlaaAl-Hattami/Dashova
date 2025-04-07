@@ -61,14 +61,19 @@ class="position-relative d-flex flex-column flex-shrink-0 p-3 text-bg-dark sideb
       height="32"
       class="rounded-circle me-2"
     />
-    <strong class="sidebar-text">Alaa Al-Hattami</strong>
+    <% if (user !== null) { %>
+      <strong class="sidebar-text"><%= user.username %></strong>
+
+    <% } else { %>
+      <strong class="sidebar-text"> لايوجد مستخدم</strong>
+      <% } %>
   </a>
   <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
     <li><a class="dropdown-item" href="#">New project...</a></li>
     <li><a class="dropdown-item" href="#">Settings</a></li>
     <li><a class="dropdown-item" href="#">Profile</a></li>
     <li><hr class="dropdown-divider" /></li>
-    <li><a class="dropdown-item" href="#">Sign out</a></li>
+    <li><a class="dropdown-item" href="/singout">Sign out</a></li>
   </ul>
 </div>
 </div>

@@ -9,7 +9,7 @@ const articleSchema = new Schema({
     password: String || Number,
     confirm_password: String || Number,
 })
-
+// هنا اشفر البيانات  الي اشتيها بس بشفر الان الباسورد فقط 
 articleSchema.pre("save", async function (next) {
  const salt = await bcrypt.genSalt();
  this.password = await bcrypt.hash(this.password, salt);
