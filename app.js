@@ -4,6 +4,7 @@ const port = process.env.PORT || 15000;
 const mongoose = require("mongoose");
 const birds = require("./routes/birds");
 const birds2 = require("./routes/addroute");
+require('dotenv').config()
 
 // require
 var methodOverride = require("method-override");
@@ -35,7 +36,7 @@ liveReloadServer.server.once("connection", () => {
 
 mongoose
   .connect(
-    "mongodb+srv://alaa1:774460081@cluster0.msyyhxg.mongodb.net/all-data?retryWrites=true&w=majority&appName=Cluster0"
+    process.env.MONGODB_URL
   )
   .then(() => {
     app.listen(port, () => {
