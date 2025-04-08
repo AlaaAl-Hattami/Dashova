@@ -29,14 +29,14 @@ body {
         border-radius: 5px;
         padding: 0.5rem;
         background-color: #1e1e1e;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem; /* تقليل المسافة السفلية */
       }
-
+      
       .input-group i {
         margin-right: 10px;
         color: #ffc107;
       }
-
+      
       .input-group input {
         border: none;
         outline: none;
@@ -44,7 +44,20 @@ body {
         color: white;
         width: 100%;
       }
-
+      
+      /* تنسيق لرسالة الخطأ */
+      #email_err,
+      #pass_err
+      {
+        display: block;
+        color: red;
+        font-size: 14px;
+        margin-top: 5px; /* مسافة قليلة بين الحقل ورسالة الخطأ */
+        word-wrap: break-word; /* للسماح بلف النص بشكل جيد */
+        white-space: normal; /* التأكد من أن النص سيتكسر إذا كان طويلًا */
+        margin-bottom: 0; /* إزالة المسافة السفلية غير المطلوبة */
+      }
+      
       .btn {
         width: 100%;
         background: linear-gradient(to right, #ffc107, #ff9800);
@@ -82,3 +95,5 @@ body {
         text-decoration: none;
         font-weight: bold;
       }
+
+   

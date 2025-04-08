@@ -40,16 +40,21 @@
             </div>
 
             <label for="email" class="text-start w-100 mb-1">Email</label>
-            <div class="input-group">
-              <i class="fas fa-envelope"></i>
-              <input type="text" id="email" name="email" placeholder="Enter your email" />
-            </div>
+              <div class="input-group">
+                  <i class="fas fa-envelope"></i>
+                  <input type="text" id="email" name="email" placeholder="Enter your email" />
+                </div>
+                <span class="text-start mb-1" id="email_err"></span>
+                
+
 
             <label for="password" class="text-start w-100 mb-1">Password</label>
             <div class="input-group">
               <i class="fas fa-lock"></i>
               <input type="password" id="password" name="password" placeholder="Create a password" />
             </div>
+            <span class="text-start mb-1" id="pass_err"></span>
+
 
             <label for="confirm-password" class="text-start w-100 mb-1">Confirm Password</label>
             <div class="input-group">
@@ -81,11 +86,9 @@
 
       registerForm.addEventListener("submit", async function (event) {
         event.preventDefault();
-
-        const username = document.querySelector("#username");
-        const email = document.querySelector("#email");
-        const password = document.querySelector("#password");
-        const confirmPassword = document.querySelector("#confirm-password");
+       
+         email_err.textContent = " "
+        pass_err.textContent = " "
 
         const res = await fetch("/register", {
           method: "POST",
@@ -93,10 +96,9 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username.value,
+            username:username.value,
             email: email.value,
             password: password.value,
-            confirm_password: confirmPassword.value,
           }),
         });
 
@@ -105,15 +107,25 @@
         if (data.arr_errors) {
           console.log("Validation errors:", data.arr_errors);
           // يمكنك إظهارها في صفحة HTML بدلاً من الكونسول
+       data.arr_errors.forEach(element => {
+        if (element.path =="email") {
+          email_err.textContent = "Please enter a valid email address.";
+        }
+        if (element.path =="password") {
+          pass_err.textContent = "Password must be at least 8 characters long, with 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.";
+        }
+        
+       });
         }
 
         if (data.EmailFound) {
           console.log("Email already exists:", data.EmailFound);
+          email_err.textContent = "Email already exists , Please try again"
         }
 
         if (data.id) {
           console.log("Registration successful!");
-          location.assign("/home");
+          location.assign("/home")
         }
       });
     </script>

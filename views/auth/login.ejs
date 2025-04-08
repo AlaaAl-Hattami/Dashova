@@ -33,18 +33,22 @@
         <div class="card">
           <h2>LOGIN</h2>
 
-          <form action="/login" method="POST" class="form-container">
+          <form id="loginForm" class="form-container">
             <label for="email" class="text-start w-100 mb-1">Email</label>
             <div class="input-group">
-              <i class="fas fa-envelope"></i>
-              <input type="email" id="email" name="email" placeholder="Enter your email" />
-            </div>
+                <i class="fas fa-envelope"></i>
+                <input type="text" id="email" name="email" placeholder="Enter your email" />
+              </div>
+              <span class="text-start mb-1" id="email_err"></span>
+              
 
-            <label for="password"  class="text-start w-100 mb-1">Password</label>
-            <div class="input-group">
-              <i class="fas fa-lock"></i>
-              <input type="password" id="password" name="password" placeholder="Enter your password" />
-            </div>
+
+          <label for="password" class="text-start w-100 mb-1">Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Create a password" />
+          </div>
+          <span class="text-start mb-1" id="pass_err"></span>
 
             <div class="checkbox-container">
               <input type="checkbox" id="remember" />
@@ -67,6 +71,40 @@
         </p>
       </footer>
     </div>
+    <script>
+
+loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+       
+         email_err.textContent = " "
+        pass_err.textContent = " "
+
+        const res = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email.value,
+            password: password.value
+          }),
+        });
+
+        const data = await res.json();
+
+        if(data.notFoundEmail){
+         email_err.textContent = data.notFoundEmail
+        }
+
+        if(data.notCorrecPassword){
+          pass_err.textContent = data.notCorrecPassword
+        }
+
+     if(data.id){
+      location.assign("/home")
+     }
+      });
+    </script>
 
     <script src="./js/bootstrap.bundle.min.js"></script>
   </body>
