@@ -39,7 +39,7 @@ const user_login_post = async (req, res) => {
         if (check_pass) {
           console.log("correct email &&&&&&& pass word");
     
-          var token = jwt.sign({ id: user_login._id }, "Dashova");
+          var token = jwt.sign({ id: user_login._id }, process.env.JWT_SECRET_KEY);
           res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 });
           res.json({id : user_login._id  })
         } else {
@@ -75,7 +75,7 @@ const user_login_post = async (req, res) => {
   
              const newuser = await Authuser.create(req.body)
   
-        var token = jwt.sign({ id: newuser._id }, "Dashova");
+        var token = jwt.sign({ id: newuser._id }, process.env.JWT_SECRET_KEY);
         res.cookie("jwt", token, { httpOnly: true, maxAge: 86400000 });
         res.json({ id: newuser._id });
   
