@@ -1,41 +1,46 @@
 const express = require('express')
 const router = express.Router()
- const usercontroller = require("../Controllers/usercontroller")
+ const userManagementController = require("../Controllers/userManagementController")
+ const authenticationController = require("../Controllers/authenticationController")
  var {requierdAuth} =require("../middleware/middleware")
  var {checkuser} = require ("../middleware/middleware")
 // get الخاصه هذه اكواد المشروع الحقيقي
 
  router.get("*" ,checkuser)
-
-router.get("/" , checkuser, usercontroller.user_welcom_get)
-
-router.get("/singout", usercontroller.user_signout_get)
+ router.post("*" ,checkuser)
 
 
-router.get("/login", usercontroller.user_login_get)
+router.get("/" , userManagementController.user_welcom_get)
 
-router.get("/register", usercontroller.user_register_get)
+router.get("/home", requierdAuth,  userManagementController.user_index_get )
 
-router.get("/home", requierdAuth,  usercontroller.user_index_get )
-
-router.get("/edit/:id",requierdAuth , usercontroller.user_edit_get)
+router.get("/edit/:id",requierdAuth , userManagementController.user_edit_get)
 
 // هنا يتم عرض البيانات في صفحة اليوزر
-router.get("/view/:id", requierdAuth , usercontroller.user_view_get)
+router.get("/view/:id", requierdAuth , userManagementController.user_view_get)
 
 
-router.post("/search", usercontroller.user_search_post)
+router.post("/search", userManagementController.user_search_post)
 
 // هذه اكواد خاصه بحذف البيانات من قاعدة البيانات
-router.delete("/edit/:id", usercontroller.user_delete) 
+router.delete("/edit/:id", userManagementController.user_delete) 
 
-router.put("/edit/:id", usercontroller.user_edit_put)
+router.put("/edit/:id", userManagementController.user_edit_put)
 
 
  // هنا بيكون الخاص بحق انشاءحساب جديد 
- router.post("/register", usercontroller.user_register_post)
+ router.post("/register", authenticationController.user_register_post)
 
- router.post("/login", usercontroller.user_login_post)
+ router.post("/login", authenticationController.user_login_post)
+
+ 
+router.get("/singout", authenticationController.user_signout_get)
+
+
+router.get("/login", authenticationController.user_login_get)
+
+router.get("/register", authenticationController.user_register_get)
+
 
 // app.post("/", (req, res) => {
 //   console.log(req.body);

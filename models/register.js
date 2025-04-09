@@ -8,6 +8,19 @@ const articleSchema = new Schema({
     email: String,
     password: String || Number,
     confirm_password: String || Number,
+    employInfo: [
+        {
+            firstname:String,
+            lastname:String,
+            email:String,
+            phone:Number,
+            age:Number,
+            country:String,
+            gender:String,
+        
+        }
+    ]
+    
 })
 // هنا اشفر البيانات  الي اشتيها بس بشفر الان الباسورد فقط 
 articleSchema.pre("save", async function (next) {

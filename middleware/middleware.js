@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const Authuser = require("../models/register");
 
-//هذه داله حق login تتحقق التوكن موجود او لا
+//هذه داله حق login تتحقق التوكن موجود او لا 
+//هذه عمليه  التحقق قبل السماح للمستخدم بالوصول إلى بعض المسارات أو الصفحات
 const requierdAuth = (req, res, next) => {
   console.log("requierdAuth");
   const token = req.cookies.jwt;
@@ -23,7 +24,7 @@ const requierdAuth = (req, res, next) => {
     res.redirect("/login");
   }
 };
-
+// هذه الدالة تتحقق إذا كان هناك توكن صالح وإذا كان المستخدم قد قام بتسجيل الدخول. إذا كان التوكن صالحًا، يتم البحث عن المستخدم في قاعدة البيانات وتخزين معلوماته في res.locals.user لتمكين الوصول إليها في أي من الصفحات التالية.
 const checkuser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
