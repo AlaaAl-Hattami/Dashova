@@ -88,26 +88,39 @@ const user_login_post = async (req, res) => {
       }
     }
   ];
-
-  const user_profile_post =  async (req, res) => {
-      try {
-        const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
-    
-        // نرفع الصورة الجديدة
-        const imagePath = `/uploads/${req.file.filename}`;
-    
-        //  نحدث قاعدة البيانات
-        await Authuser.updateOne(
-          { _id: decoded.id },
-          { profileImage: imagePath }
-        );
-          res.redirect("/home");
-    
-      } catch (err) {
-        console.error("خطأ أثناء رفع الصورة:", err);
+  const user_profile_post = async (req, res) => {
+    try {
+      // التحقق من صحة JWT (التأكد من أن المستخدم مسجل دخوله)
+      const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
+  
+      // تحقق مما إذا كانت الصورة تم رفعها من قبل المستخدم
+      if (!req.file) {
+        return res.status(400).send("لم يتم رفع صورة جديدة.");
       }
+  
+      // تحديد المسار الذي سيتم تخزين الصورة فيه
+      const imagePath = `/uploads/${req.file.filename}`;
+  
+      // تحديث السجل في قاعدة البيانات مع المسار الجديد للصورة
+      const result = await Authuser.updateOne(
+        { _id: decoded.id },
+        { profileImage: imagePath }
+      );
+  
+      // تحقق إذا كان التحديث قد تم بنجاح
+      if (result.nModified === 0) {
+        return res.status(404).send("لم يتم العثور على المستخدم.");
+      }
+  
+      // إعادة توجيه المستخدم بعد النجاح
+      res.redirect("/home");
+  
+    } catch (err) {
+      console.error("خطأ أثناء رفع الصورة:", err);
+      res.status(500).send("حدث خطأ أثناء محاولة تحديث الصورة.");
     }
-
+  }
+  
 
 module.exports= {
     user_register_get,
