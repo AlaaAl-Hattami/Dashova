@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const articleSchema = new Schema({
-  
+    profileImage:String,
     username: String,
     email: String,
     password: String || Number,
@@ -17,6 +17,8 @@ const articleSchema = new Schema({
             age:Number,
             country:String,
             gender:String,
+            createdAt: Date,
+            updatedAt: { type: Date, default: Date.now }
         
         }
     ]

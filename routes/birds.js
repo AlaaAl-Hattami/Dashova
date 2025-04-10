@@ -4,12 +4,27 @@ const router = express.Router()
  const authenticationController = require("../Controllers/authenticationController")
  var {requierdAuth} =require("../middleware/middleware")
  var {checkuser} = require ("../middleware/middleware")
-// get الخاصه هذه اكواد المشروع الحقيقي
+ const path = require("path");
+
+ const multer  = require('multer')
+ const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "uploads"); // مجلد الصور
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); // اسم فريد
+    }
+  });
+  const upload = multer({ storage: storage });
 
  router.get("*" ,checkuser)
  router.post("*" ,checkuser)
 
-
+ router.post("/profile", upload.single("img"),
+   authenticationController.user_profile_post
+);
+  
+  
 router.get("/" , userManagementController.user_welcom_get)
 
 router.get("/home", requierdAuth,  userManagementController.user_index_get )

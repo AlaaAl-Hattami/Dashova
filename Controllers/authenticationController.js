@@ -5,6 +5,11 @@ const { check, validationResult } = require("express-validator");
 
 
 
+
+//  const user_profile_post = (req, res) => {
+
+//  }
+
 const user_login_get = (req, res) => {
     res.render("auth/login");
   };
@@ -17,7 +22,6 @@ const user_login_get = (req, res) => {
 
 const user_signout_get = (req, res) => {
     res.cookie("jwt", "", {maxAge : 1})
- 
     res.redirect("/")
   }
 
@@ -85,11 +89,31 @@ const user_login_post = async (req, res) => {
     }
   ];
 
+  const user_profile_post =  async (req, res) => {
+      try {
+        const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET_KEY);
+    
+        // نرفع الصورة الجديدة
+        const imagePath = `/uploads/${req.file.filename}`;
+    
+        //  نحدث قاعدة البيانات
+        await Authuser.updateOne(
+          { _id: decoded.id },
+          { profileImage: imagePath }
+        );
+          res.redirect("/home");
+    
+      } catch (err) {
+        console.error("خطأ أثناء رفع الصورة:", err);
+      }
+    }
+
 
 module.exports= {
     user_register_get,
     user_signout_get,
     user_login_get,
     user_login_post,
-    user_register_post
+    user_register_post,
+    user_profile_post
 }
