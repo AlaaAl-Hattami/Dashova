@@ -92,7 +92,16 @@ const user_edit_put = (req, res) => {
   Authuser.updateOne(
     { "employInfo._id": req.params.id },
     //اذا كنت تريد مثلا تعمل تعديل ع حقل واحد نعمل بعد .$.username او اي شي
-    { "employInfo.$": req.body }
+    { "employInfo.$.firstname": req.body.firstname,
+      "employInfo.$.lastname": req.body.lastname,
+      "employInfo.$.email": req.body.email,
+      "employInfo.$.phone": req.body.phone,
+      "employInfo.$.age": req.body.age,
+      "employInfo.$.country": req.body.country,
+      "employInfo.$.gender": req.body.gender, 
+      "employInfo.$.updatedAt": new Date(),
+
+     }
   )
     .then(() => {
       res.redirect("/home");
@@ -112,7 +121,23 @@ const user_post = (req, res) => {
     " ====================================================================="
   );
   console.log(req.body);
-  Authuser.updateOne({ _id: decoded.id }, { $push: { employInfo: req.body } })
+  Authuser.updateOne({ _id: decoded.id }, { $push: 
+    
+    { employInfo: {
+      firstname : req.body.firstname,
+      lastname :req.body.lastname,
+      email: req.body.email,
+      phone: req.body.phone,
+      age :req.body.age,
+      country : req.body.country,
+      gender : req.body.gender,
+      createdAt : new Date()
+
+    }
+    
+
+   } })
+
     .then(() => {
       res.redirect("/home");
     })
